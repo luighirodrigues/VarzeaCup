@@ -15,10 +15,10 @@
 ## 5 Passo
 ### Comando -> npm install
 
-Vamos executar o front end agora
-Basta executar dentro da pasta do varzeacup/varzeacup
+## Vamos executar o front end agora
+## Basta executar dentro da pasta do varzeacup/varzeacup
 ### Comando -> npm run dev
 
-Vamos executar o back end agora
-Basta dividir ou abrir novo terminal e ir para pasta raiz ./
+## Vamos executar o back end agora
+## Basta dividir ou abrir novo terminal e ir para pasta raiz ./
 ### Comando -> php artisan serve
