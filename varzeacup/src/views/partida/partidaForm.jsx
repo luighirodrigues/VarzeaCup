@@ -97,7 +97,8 @@ export default function PartidaForm(){
             <input type="datetime-local" value={partida.horario} onChange={ev => setPartida({...partida, horario: ev.target.value})} placeholder="Horario"/>
             <input type="rodada" value={partida.rodada} onChange={ev => setPartida({...partida, rodada: ev.target.value})} placeholder="Rodada"/>
             <label>Time da Casa</label>
-            <select defaultValue={partida.time_casa_id} onChange={ev => setPartida({...partida, time_casa_id: ev.target.value})}>
+            <select defaultValue={partida.time_casa_id?partida.time_casa_id:''} onChange={ev => setPartida({...partida, time_casa_id: ev.target.value})}>
+              <option hidden>Selecione um Time</option>
               {
                 times && times.map((time)=>{
                   return <option key={time.id} value={time.id}>{time.nome}</option>
@@ -105,7 +106,8 @@ export default function PartidaForm(){
               }
             </select>
             <label>Time Visitante</label>
-            <select defaultValue={partida.time_visitante_id} onChange={ev => setPartida({...partida, time_visitante_id: ev.target.value})}>
+            <select defaultValue={partida.time_visitante_id?partida.time_visitante_id:''} onChange={ev => setPartida({...partida, time_visitante_id: ev.target.value})}>
+              <option hidden>Selecione um Time</option>
               {
                 times && times.map((time)=>{
                   return <option key={time.id} value={time.id}>{time.nome}</option>

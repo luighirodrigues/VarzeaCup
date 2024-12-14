@@ -76,13 +76,19 @@ export default function TimeForm(){
             ))}
           </div>
         }
-        {!loading && (
+        {id&&!loading && (
           <form onSubmit={onSubmit}>
             <input value={time.nome} onChange={ev => setTime({...time, nome: ev.target.value})} placeholder="Nome"/>
             <input type="number" value={time.vitorias} onChange={ev => setTime({...time, vitorias: ev.target.value})} placeholder="Vitorias"/>
             <input value={time.derrotas} onChange={ev => setTime({...time, derrotas: ev.target.value})} placeholder="Empates"/>
             <input value={time.empates} onChange={ev => setTime({...time, empates: ev.target.value})} placeholder="Derrotas"/>
             <input value={time.partidas_jogadas} onChange={ev => setTime({...time, partidas_jogadas: ev.target.value})} placeholder="Partidas Jogadas"/>
+            <button className="btn">Salvar</button>
+          </form>
+        )}
+        {!id&&!loading && (
+          <form onSubmit={onSubmit}>
+            <input value={time.nome} onChange={ev => setTime({...time, nome: ev.target.value})} placeholder="Nome"/>
             <button className="btn">Salvar</button>
           </form>
         )}

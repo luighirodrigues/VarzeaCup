@@ -39,6 +39,7 @@ export default function Register() {
                 <form onSubmit={Submit}>
                     <input ref={nameRef} type="text" placeholder="Nome" />
                     <input ref={emailRef} type="email" placeholder="Email" />
+                    <label>Senha Precisa Conter 1 Letra, Minimo de 8 Caracteres</label>
                     <input ref={passwordRef} type="password" placeholder="Senha" />
                     <button className="btn btn-block" type="submit">Registrar</button>
                     <p className="message">
