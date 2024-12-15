@@ -16,6 +16,7 @@ Route::middleware('auth:sanctum')->group(function(){
     route::apiResource('/times', TimeController::class);
     route::apiResource('/partidas', PartidaController::class);
 });
-Route::get('tabela',[TimeController::class,'index']);
+Route::get('tabela/time',[TimeController::class,'index']);
+Route::get('tabela/partida',[PartidaController::class,'index']);
 Route::post('login',[AuthController::class,'login']);
 Route::post('register',[AuthController::class,'register']);

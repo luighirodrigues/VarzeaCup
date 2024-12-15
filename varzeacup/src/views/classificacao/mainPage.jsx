@@ -4,15 +4,36 @@ import axiosClient from "../../axiosClient"
 export default function Tabela(){
 
     const [times, setTimes] = useState([])
+    const [partidas, setPartidas] = useState([])
+
+    const dataInicio = new Date("2024-01-01");
+    const dataFim = new Date("2024-12-31");
+
+    const partidasFiltradas = partidas.filter(p => {
+        const dataPartida = new Date(p.horario);
+        return dataPartida >= dataInicio && dataPartida <= dataFim;
+    });
+    
     const [loading, setLoading] = useState(true)
 
+    
     const getTimes = () => {
         setLoading(true)
-        axiosClient.get('/tabela')
+        axiosClient.get('/tabela/time')
           .then(({ data }) => {
-            console.log(data)
             setLoading(false)
             setTimes(data.data)
+          })
+          .catch(() => {
+            setLoading(false)
+          })
+    }
+    const getPartidas = () => {
+        setLoading(true)
+        axiosClient.get('/tabela/partida')
+          .then(({ data }) => {
+            setLoading(false)
+            setPartidas(data.data)
           })
           .catch(() => {
             setLoading(false)
@@ -21,12 +42,15 @@ export default function Tabela(){
 
     useEffect(()=>{
         getTimes();
+        getPartidas();
     },[])
 
 
     return(
         <div className="defaultLayout">
             <div className="card animated fadeInDown">   
+                <h1>Tabela de Classificação</h1>
+                <br/>
                 <table>
                     <thead>
                         <tr>
@@ -63,6 +87,46 @@ export default function Tabela(){
                                             <td>{t.vitorias}</td>
                                             <td>{t.empates}</td>
                                             <td>{t.derrotas}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    }
+                </table>
+                <br/>
+                <h1>Partidas</h1>
+                <br/>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time da Casa</th>
+                            <th>Time de Fora</th>
+                            <th>Data</th>
+                            <th>Rodada</th>
+                        </tr>
+                    </thead>
+                    {
+                        loading && 
+                        <tbody>
+                            <tr>
+                                <td colSpan="5" className="text-center">
+                                Loading...
+                                </td>
+                            </tr>
+                        </tbody>
+                    }
+                    {
+                        !loading && 
+                        <tbody>
+                            {
+                                partidasFiltradas.map((p)=>{
+                                    return( 
+                                        <tr key={p.id}>
+                                            <td>{times && times.find(t=>t.id===p.time_casa_id)?.nome}</td>
+                                            <td>{times && times.find(t=>t.id===p.time_visitante_id)?.nome}</td>
+                                            <td>{p.horario}</td>
+                                            <td>{p.rodada}</td>
                                         </tr>
                                     )
                                 })

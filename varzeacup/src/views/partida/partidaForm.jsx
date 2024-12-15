@@ -72,6 +72,16 @@ export default function PartidaForm(){
                 setErrors(response.data.errors)
               }
             })
+          axiosClient.post('/partidas', {time_casa_id:partida.time_visitante_id, time_visitante_id:partida.time_casa_id, horario:partida.horario, rodada:partida.rodada})
+            .then(() => {
+              navigate('/partidas')
+            })
+            .catch(err => {
+              const response = err.response;
+              if (response && response.status === 422) {
+                setErrors(response.data.errors)
+              }
+            })
         }
       }
 

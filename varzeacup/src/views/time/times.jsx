@@ -72,7 +72,7 @@ export default function Times(){
                   <td>{t.empates}</td>
                   <td>{t.derrotas}</td>
                   <td>{t.partidas_jogadas}</td>
-                  <td>1</td>
+                  <td>{t.pontuacao}</td>
                   <td>
                     <Link className="btn-edit" to={'/times/' + t.id}>Editar</Link>
                     &nbsp;
